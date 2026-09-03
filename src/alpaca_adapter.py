@@ -30,6 +30,13 @@ class GatedOrderRouter:
     def get_account(self):
         return self.client.get_account()
 
+    def warmup(self):
+        """Establish the TLS/keep-alive connection now, before any real
+        order needs to go out (see alpaca-paper-trader's pairs_signal.py
+        for the measured ~176-180ms cold-connection penalty this avoids).
+        """
+        return self.client.get_account()
+
     def submit_limit_order(self, symbol: str, side: str, qty: float, limit_price: float):
         now = time.time()
         self.risk_gate.check_order(symbol, side, qty, limit_price, now)  # raises on breach
