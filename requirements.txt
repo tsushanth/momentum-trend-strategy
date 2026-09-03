@@ -1,0 +1,5 @@
+numpy>=1.24
+pandas>=2.0
+yfinance>=0.2.40
+pytest>=7.0
+alpaca-py>=0.20   # only needed to read paper-account equity in the dry-run executor
